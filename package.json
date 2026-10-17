@@ -1,0 +1,1 @@
+{"name":"fluxlab-semicircle","version":"1.1.0","private":true,"type":"module","scripts":{"build":"python3 build.py","test":"node tests/physics.test.mjs && node tests/analytic.test.mjs"}}
