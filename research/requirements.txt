@@ -1,0 +1,6 @@
+numpy==2.3.5
+scipy==1.17.0
+simsopt==1.11.1
+desc-opt==0.17.2
+jax==0.9.2
+jaxlib==0.9.2

@@ -2,6 +2,10 @@
 
 [Open the live demo](https://tomdif.github.io/fluxlab-semicircle/)
 
+[Open the confinement research workbench](https://tomdif.github.io/fluxlab-semicircle/fusion/) · [Research methods](research/README.md)
+
+The research extension runs a published 16-coil stellarator baseline through a reproducible field-error correction study, short particle traces, and a **separate** fixed-boundary plasma-pressure benchmark. It displays actual SIMSOPT/DESC outputs. It does not demonstrate improved plasma confinement or a working fusion reactor.
+
 A self-contained, offline HTML lesson and coil design workbench. Download `index.html` and open it in a modern browser; no installation, server, network, or external libraries are required for the calculations. Reference links need a connection.
 
 ## What it includes
