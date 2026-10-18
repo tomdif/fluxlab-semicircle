@@ -82,8 +82,11 @@ $('caseBars').addEventListener('click',e=>{const b=e.target.closest('button');if
 function drawGeometry(){
  const canvas=$('geometry'),rect=canvas.getBoundingClientRect();if(!rect.width)return;
  const ratio=Math.min(devicePixelRatio||1,2);canvas.width=rect.width*ratio;canvas.height=rect.height*ratio;
- const ctx=canvas.getContext('2d');ctx.scale(ratio,ratio);const w=rect.width,h=rect.height,s=Math.min(w/3.9,h/2.5),a=rotation*Math.PI/180;
- const project=p=>{let X=p[0]*Math.cos(a)-p[1]*Math.sin(a),Y=p[0]*Math.sin(a)+p[1]*Math.cos(a);return [w/2+X*s,h/2+(Y*.45-p[2]*.89)*s];};
+ const ctx=canvas.getContext('2d');ctx.scale(ratio,ratio);const w=rect.width,h=rect.height,a=rotation*Math.PI/180;
+ const raw=p=>[p[0]*Math.cos(a)-p[1]*Math.sin(a),(p[0]*Math.sin(a)+p[1]*Math.cos(a))*.45-p[2]*.89];
+ const bounds=D.geometry.coils.flat().map(raw),xx=bounds.map(p=>p[0]),yy=bounds.map(p=>p[1]);
+ const xmin=Math.min(...xx),xmax=Math.max(...xx),ymin=Math.min(...yy),ymax=Math.max(...yy),s=Math.min((w-40)/(xmax-xmin),(h-48)/(ymax-ymin));
+ const project=p=>{const q=raw(p);return [w/2+(q[0]-(xmin+xmax)/2)*s,(h-12)/2+(q[1]-(ymin+ymax)/2)*s];};
  ctx.strokeStyle='#263d46';ctx.lineWidth=.6;
  for(let v=-1.5;v<=1.51;v+=.3){for(const pts of [[[-1.5,v,-.48],[1.5,v,-.48]],[[v,-1.5,-.48],[v,1.5,-.48]]]){ctx.beginPath();pts.forEach((p,i)=>{const q=project(p);i?ctx.lineTo(...q):ctx.moveTo(...q);});ctx.stroke();}}
  function line(pts,color,width,closed){ctx.beginPath();pts.forEach((p,i)=>{const q=project(p);i?ctx.lineTo(...q):ctx.moveTo(...q);});if(closed)ctx.closePath();ctx.strokeStyle=color;ctx.lineWidth=width;ctx.stroke();}
